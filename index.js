@@ -1,6 +1,6 @@
 'use strict';
 
-// Provide APIs in this module, it could be empty if not intended to provide APIs.
+// Export APIs of the plugin so that they could be used programatically.
 import { init, add, remove, move } from './action';
 
 module.exports = {
