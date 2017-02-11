@@ -16,7 +16,6 @@ const vio = rekitCore.vio;
 function afterAddFeature(featureName) {
   // Summary:
   //  Called after a feature is added. Add sagas.js and add entry in rootSaga.js
-
   const rootSaga = utils.mapSrcFile('common/rootSaga.js');
   refactor.updateFile(rootSaga, ast => [].concat(
     refactor.addImportFrom(ast, `../features/${_.kebabCase(featureName)}/redux/sagas`, null, null, `${_.camelCase(featureName)}Sagas`),
@@ -31,7 +30,6 @@ function afterAddFeature(featureName) {
 function afterRemoveFeature(featureName) {
   // Summary:
   //  Called after a feature is removed. Remove entry from rootSaga.js
-
   const rootSaga = utils.mapSrcFile('common/rootSaga.js');
   refactor.updateFile(rootSaga, ast => [].concat(
     refactor.removeImportBySource(ast, `../features/${_.kebabCase(featureName)}/redux/sagas`),
@@ -42,7 +40,6 @@ function afterRemoveFeature(featureName) {
 function afterMoveFeature(oldName, newName) {
   // Summary:
   //  Called after a feature is renamed. Rename entry in rootSaga.js
-
   const rootSaga = utils.mapSrcFile('common/rootSaga.js');
   refactor.updateFile(rootSaga, ast => [].concat(
     refactor.renameModuleSource(ast, `../features/${_.kebabCase(oldName)}/redux/sagas`, `../features/${_.kebabCase(newName)}/redux/sagas`),
