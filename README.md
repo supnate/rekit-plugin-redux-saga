@@ -1,2 +1,2 @@
 # rekit-plugin-redux-saga
-Rekit plugin for redux-saga.
+Use redux-saga for async actions instead of default redux-thunk.
