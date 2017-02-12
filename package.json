@@ -1,6 +1,6 @@
 {
   "name": "rekit-plugin-redux-saga",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha.1",
   "description": "Use redux-saga for async actions.",
   "keywords": [
     "rekit",
@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "rekit-core": "next",
     "redux-saga": "^0.14.3"
   },
   "devDependencies": {

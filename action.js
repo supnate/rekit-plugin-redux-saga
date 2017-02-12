@@ -5,6 +5,7 @@
 //  redux-thunk by default. It overrides the action management provided by rekit-core.
 //  And it delegates action mgmt to rekit-core if it's sync.
 
+const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const rekitCore = require('rekit-core');
@@ -14,17 +15,18 @@ const utils = rekitCore.utils;
 const refactor = rekitCore.refactor;
 const test = rekitCore.test;
 const action = rekitCore.action;
+const vio = rekitCore.vio;
 
 _.pascalCase = _.flow(_.camelCase, _.upperFirst);
 _.upperSnakeCase = _.flow(_.snakeCase, _.toUpper);
 
-function init() {
+function ensureInit() {
   // Summary
   //  Init the project to be ready for redux-saga
   const rootSagaPath = utils.mapSrcFile('common/rootSaga.js');
 
   // Check if saga plugin is already installed
-  if (shell.test('-e', rootSagaPath)) {
+  if (fs.existsSync(rootSagaPath)) {
     return;
   }
 
@@ -57,11 +59,8 @@ function init() {
   vio.save(configStorePath, lines);
 }
 
-function uninit() {
-
-}
-
 function add(feature, name, args) {
+  ensureInit();
   feature = _.kebabCase(feature);
   name = _.camelCase(name);
 
@@ -89,6 +88,7 @@ function add(feature, name, args) {
 }
 
 function remove(feature, name) {
+  ensureInit();
   feature = _.kebabCase(feature);
   name = _.camelCase(name);
 
@@ -101,6 +101,7 @@ function remove(feature, name) {
 }
 
 function move(source, target) {
+  ensureInit();
   rekitCore.moveAction(source, target);
 
   source.feature = _.kebabCase(source.feature);
@@ -135,8 +136,6 @@ function move(source, target) {
 }
 
 module.exports = {
-  init,
-  uninit,
   add,
   remove,
   move,

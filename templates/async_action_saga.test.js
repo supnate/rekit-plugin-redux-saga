@@ -52,7 +52,7 @@ describe('${_.kebabCase(feature)}/redux/${_.camelCase(action)}', () => {
     const err = new Error('errored');
     expect(generatorForError.throw(err).value).to.deep.equal(put({
       type: ${actionTypes.failure},
-      error: err,
+      data: { error: err },
     }));
   });
 

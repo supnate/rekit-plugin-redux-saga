@@ -30,7 +30,7 @@ export function* do${_.pascalCase(action)}() {
   } catch (err) {
     yield put({
       type: ${actionTypes.failure},
-      error: err,
+      data: { error: err },
     });
     return;
   }
@@ -44,7 +44,7 @@ export function* do${_.pascalCase(action)}() {
 /*
   Alternatively you may use takeEvery.
 
-  takeLatest does not allow concurrent fetches of user. If an action gets
+  takeLatest does not allow concurrent requests. If an action gets
   dispatched while another is already pending, that pending one is cancelled
   and only the latest one will be run.
 */
