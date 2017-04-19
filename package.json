@@ -14,7 +14,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "rekit-core": "next",
     "redux-saga": "^0.14.3"
   },
   "devDependencies": {
