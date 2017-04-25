@@ -8,17 +8,19 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const afterAddFeature = require('./hooks').afterAddFeature;
 
 _.pascalCase = _.flow(_.camelCase, _.upperFirst);
 _.upperSnakeCase = _.flow(_.snakeCase, _.toUpper);
 
 module.exports = function(rekitCore) {
+  const app = rekitCore.app;
   const utils = rekitCore.utils;
   const refactor = rekitCore.refactor;
   const test = rekitCore.test;
   const action = rekitCore.action;
   const vio = rekitCore.vio;
+
+  const afterAddFeature = require('./hooks')(rekitCore).afterAddFeature;
 
   function ensureInit() {
     // Summary
@@ -54,7 +56,8 @@ module.exports = function(rekitCore) {
     lines.splice(i, 0, '  sagaMiddleware.run(rootSaga);');
 
     // Init existing features
-    utils.getFeatures().forEach(afterAddFeature);
+    console.log(app.getFeatures().forEach);
+    app.getFeatures().forEach(afterAddFeature);
 
     vio.save(configStorePath, lines);
   }
